@@ -32,10 +32,12 @@ export async function readStoredContent(): Promise<Content | null> {
     const { blobs } = await list({ prefix: CONTENT_PATHNAME, limit: 1 });
     const entry = blobs.find((b) => b.pathname === CONTENT_PATHNAME);
     if (!entry) return null;
-    // Vercel Blob cachează conținutul la acel URL până la 60s după o suprascriere;
-    // un query param unic forțează un cache MISS, ca modificările din admin să
-    // apară imediat, nu cu întârziere aleatorie.
-    const freshUrl = `${entry.url}?v=${entry.uploadedAt.getTime()}`;
+    // Vercel Blob cachează conținutul la acel URL până la 60s după o suprascriere.
+    // Nu ne putem baza pe `entry.uploadedAt` (vine tot din list(), care poate
+    // rămâne puțin în urmă) — folosim ceasul de sistem, mereu unic, ca fiecare
+    // citire să fie un cache MISS garantat și modificările din admin să apară
+    // imediat.
+    const freshUrl = `${entry.url}?v=${Date.now()}`;
     const res = await fetch(freshUrl, { cache: "no-store" });
     if (!res.ok) return null;
     return (await res.json()) as Content;
