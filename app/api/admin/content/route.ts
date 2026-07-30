@@ -35,9 +35,14 @@ export async function PUT(request: Request) {
     );
   }
 
-  const current = (await readStoredContent()) ?? defaultContent;
-  const updated = { ...current, [body.section]: result.data };
-  await writeStoredContent(updated);
+  try {
+    const current = (await readStoredContent()) ?? defaultContent;
+    const updated = { ...current, [body.section]: result.data };
+    await writeStoredContent(updated);
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Eroare necunoscută.";
+    return NextResponse.json({ error: `Salvarea a eșuat: ${message}` }, { status: 500 });
+  }
 
   revalidatePath("/", "layout");
 

@@ -28,7 +28,12 @@ export async function POST(request: Request) {
   }
 
   const buffer = Buffer.from(await file.arrayBuffer());
-  const url = await uploadImage(buffer, file.name, file.type, folder);
 
-  return NextResponse.json({ url });
+  try {
+    const url = await uploadImage(buffer, file.name, file.type, folder);
+    return NextResponse.json({ url });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Eroare necunoscută.";
+    return NextResponse.json({ error: `Urcarea a eșuat: ${message}` }, { status: 500 });
+  }
 }
