@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Tokens de design AS Dan Chilom
+   Paleta e derivată din blazon: negru profund, magenta ASDC, alb.
+   ========================================================================== */
+@theme {
+  --color-ink: #0a0a0c;
+  --color-surface: #141418;
+  --color-surface-2: #1c1c22;
+  --color-line: #2b2b34;
+  --color-brand: #e6007e;
+  --color-brand-soft: #ff4fb0;
+  --color-brand-dim: #7a0043;
+  --color-paper: #ffffff;
+  --color-muted: #a5a5b0;
+
+  --font-display: var(--font-oswald), "Arial Narrow", sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 1rem;
+}
+
+/* ==========================================================================
+   Bază
+   ========================================================================== */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Compensează header-ul sticky când se sare la o ancoră */
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    /* Bara fixă de acțiuni de pe mobil nu trebuie să acopere finalul paginii */
+    padding-bottom: env(safe-area-inset-bottom);
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: 0.005em;
+    line-height: 1.05;
+    text-transform: uppercase;
+  }
+
+  /* Focus vizibil și consistent, pe tot site-ul */
+  :focus-visible {
+    outline: 3px solid var(--color-brand-soft);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--color-brand);
+    color: #fff;
+  }
+
+  /* Safari afișează un triunghi propriu la <details>; îl scoatem. */
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Utilitare proprii
+   ========================================================================== */
+@utility container-site {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  max-width: 80rem;
+
+  @media (width >= 48rem) {
+    padding-inline: 2rem;
+  }
+}
+
+/* Titlu de secțiune, cu dimensiune fluidă mobile-first */
+@utility h-section {
+  font-size: clamp(1.9rem, 1.35rem + 2.6vw, 3.25rem);
+}
+
+@utility h-hero {
+  font-size: clamp(2.6rem, 1.4rem + 6.4vw, 6rem);
+}
+
+/* Dungile verticale alb/negru din blazon, folosite ca textură discretă */
+@utility stripes {
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 0px,
+    rgba(255, 255, 255, 0.05) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+}
+
+/* Colț tăiat, accent sportiv pe carduri și butoane */
+@utility cut-corner {
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+}
+
+/* Blazonul e un JPG cu fundal întunecat cu pattern; decupăm cercul curat. */
+@utility crest-clip {
+  clip-path: circle(47% at 50% 50%);
+}
+
+/* ==========================================================================
+   Animații (respectă prefers-reduced-motion)
+   ========================================================================== */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility animate-rise {
+  animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Ascunde scrollbar-ul la carusele orizontale, păstrând scroll-ul funcțional */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
