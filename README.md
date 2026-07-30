@@ -54,8 +54,9 @@ Fără `ADMIN_PASSWORD` configurat, `/admin` e dezactivat automat — vezi
 
 Codul site-ului stă în acest repo (git → Vercel), dar **conținutul** (tot ce se editează
 din `/admin`, inclusiv pozele încărcate) e stocat separat, pe **Vercel Blob** — de-asta
-apar imediat, fără să fie nevoie de un build nou. Fără `BLOB_READ_WRITE_TOKEN` configurat,
-modificările se salvează doar local pe disc (`content/data.json` + `public/img/uploads/`),
+apar imediat, fără să fie nevoie de un build nou. Fără Blob conectat (nici
+`BLOB_READ_WRITE_TOKEN`, nici `BLOB_STORE_ID`), modificările se salvează doar local pe
+disc (`content/data.json` + `public/img/uploads/`),
 util pentru dezvoltare, dar **nu suficient pentru producție**: la Vercel, discul e
 resetat la fiecare redeploy. Vezi secțiunea „Publicare pe Vercel" mai jos.
 
@@ -104,8 +105,9 @@ nu doar în browser.
 2. [vercel.com](https://vercel.com) → **Add New → Project** → alegi repo-ul.
    Vercel detectează singur Next.js; nu trebuie schimbată nicio setare.
 3. **Storage → Create Database → Blob** (din dashboard-ul proiectului) → creezi un store
-   nou. Vercel adaugă automat `BLOB_READ_WRITE_TOKEN` în variabilele de mediu ale
-   proiectului — necesar ca modificările din `/admin` să rămână salvate definitiv.
+   nou și îl conectezi la proiect. Vercel adaugă automat `BLOB_STORE_ID` (autentificare
+   OIDC, fără un token static) în variabilele de mediu ale proiectului — necesar ca
+   modificările din `/admin` să rămână salvate definitiv, nu doar local pe disc.
 4. **Settings → Environment Variables** → adaugi `ADMIN_PASSWORD` cu parola aleasă pentru
    panoul de administrare.
 5. **Deploy.** Site-ul e live pe un subdomeniu `.vercel.app`.

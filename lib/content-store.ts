@@ -2,8 +2,13 @@
  * Strat de stocare pentru conținutul editabil din admin.
  *
  * Pe Vercel (producție), conținutul și pozele urcate din admin se salvează în
- * Vercel Blob (`BLOB_READ_WRITE_TOKEN`) — sistemul de fișiere e efemer/needitabil
- * acolo. Local, fără acel token, se scrie direct pe disc, în `content/data.json`
+ * Vercel Blob — sistemul de fișiere e efemer/needitabil acolo. Proiectele Blob
+ * noi (create direct din dashboard) folosesc autentificare OIDC: nu primesc
+ * `BLOB_READ_WRITE_TOKEN`, ci `BLOB_STORE_ID` + `VERCEL_OIDC_TOKEN` (injectat
+ * automat de Vercel la runtime și reînnoit singur) — `@vercel/blob` le
+ * folosește automat pe acestea dacă există, fără cod suplimentar. De-asta
+ * `hasBlob()` verifică oricare dintre cele două variabile, nu doar tokenul
+ * vechi. Local, fără niciuna, se scrie direct pe disc, în `content/data.json`
  * și `public/img/uploads/`, ca dezvoltarea și testarea admin-ului să meargă fără
  * niciun cont sau configurare — la fel ca fallback-ul de la formularul de
  * înscriere (vezi app/api/inscriere/route.ts).
@@ -18,7 +23,7 @@ const LOCAL_DATA_FILE = path.join(process.cwd(), "content", "data.json");
 const LOCAL_UPLOADS_DIR = path.join(process.cwd(), "public", "img", "uploads");
 
 function hasBlob() {
-  return Boolean(process.env.BLOB_READ_WRITE_TOKEN);
+  return Boolean(process.env.BLOB_READ_WRITE_TOKEN || process.env.BLOB_STORE_ID);
 }
 
 export async function readStoredContent(): Promise<Content | null> {
