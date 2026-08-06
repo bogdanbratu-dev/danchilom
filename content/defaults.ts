@@ -213,6 +213,18 @@ export const defaultContent: Content = {
     },
   ],
 
+  // TODO(Dan): trimite pozele fiecărui membru din echipă.
+  teamMembers: [
+    { name: "Ioan Chilom", role: "Președinte", photo: "" },
+    { name: "Dan Chilom", role: "Licență UEFA A", photo: "" },
+    { name: "Dorian Perianu", role: "Licență UEFA B", photo: "" },
+    { name: "David Enache", role: "Licență UEFA C", photo: "" },
+    { name: "Gheorghiu Rareș", role: "Licență UEFA C", photo: "" },
+    { name: "Niculae „Sensei” Constantin", role: "Licență UEFA, preparator fizic", photo: "" },
+    { name: "Sacalov Andrei", role: "Delegat", photo: "" },
+    { name: "Patrick", role: "Social Media", photo: "" },
+  ],
+
   // TODO(Dan): citatul de mai jos e scris de noi, în spiritul academiei —
   // spune-ne cum l-ai formula tu, e mesajul tău personal către părinți.
   founderQuote: {

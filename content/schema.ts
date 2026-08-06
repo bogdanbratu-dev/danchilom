@@ -98,6 +98,12 @@ export const coachSchema = z.object({
   photo: z.string(),
 });
 
+export const teamMemberSchema = z.object({
+  name: z.string().min(1),
+  role: z.string().min(1),
+  photo: z.string(),
+});
+
 export const founderQuoteSchema = z.object({
   text: z.string().min(1),
   author: z.string().min(1),
@@ -137,6 +143,7 @@ export const contentSchema = z.object({
   bases: z.array(baseSchema),
   timeline: z.array(milestoneSchema),
   staff: z.array(coachSchema),
+  teamMembers: z.array(teamMemberSchema),
   founderQuote: founderQuoteSchema,
   trophies: z.array(trophySchema),
   gallery: z.array(galleryPhotoSchema),
@@ -155,6 +162,7 @@ export type BaseImage = z.infer<typeof baseImageSchema>;
 export type Base = z.infer<typeof baseSchema>;
 export type Milestone = z.infer<typeof milestoneSchema>;
 export type Coach = z.infer<typeof coachSchema>;
+export type TeamMember = z.infer<typeof teamMemberSchema>;
 export type FounderQuote = z.infer<typeof founderQuoteSchema>;
 export type Trophy = z.infer<typeof trophySchema>;
 export type GalleryPhoto = z.infer<typeof galleryPhotoSchema>;
@@ -173,6 +181,7 @@ export const sectionKeys = [
   "bases",
   "timeline",
   "staff",
+  "teamMembers",
   "founderQuote",
   "trophies",
   "gallery",
@@ -191,6 +200,7 @@ const sectionSchemas: Record<SectionKey, z.ZodTypeAny> = {
   bases: z.array(baseSchema),
   timeline: z.array(milestoneSchema),
   staff: z.array(coachSchema),
+  teamMembers: z.array(teamMemberSchema),
   founderQuote: founderQuoteSchema,
   trophies: z.array(trophySchema),
   gallery: z.array(galleryPhotoSchema),

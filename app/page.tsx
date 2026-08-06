@@ -4,11 +4,12 @@ import { BaseCard, FeatureCard, GroupCard, TrophyList } from "@/components/Cards
 import { Hero } from "@/components/Hero";
 import { IconArrow, IconPhone, IconWhatsapp } from "@/components/Icons";
 import { StatsBar } from "@/components/StatsBar";
+import { TeamCarousel } from "@/components/TeamCarousel";
 import { ButtonGhost, ButtonPrimary, SectionHeading, TextLink } from "@/components/UI";
 import { getContent } from "@/lib/content";
 
 export default async function HomePage() {
-  const { site, bases, contact, founderQuote, gallery, groups, stats, trophies, values } =
+  const { site, bases, contact, founderQuote, gallery, groups, stats, teamMembers, trophies, values } =
     await getContent();
 
   // Primele 8 poze din galerie formează mozaicul de pe prima pagină.
@@ -153,6 +154,22 @@ export default async function HomePage() {
           <TextLink href="/galerie">Toată galeria</TextLink>
         </div>
       </section>
+
+      {/* 8b — Membri staff ----------------------------------------------------- */}
+      {teamMembers.length > 0 && (
+        <section className="border-y border-line bg-surface/60">
+          <div className="container-site py-20 lg:py-28">
+            <SectionHeading
+              eyebrow="Echipa"
+              title="Membrii staff-ului"
+              intro="Oamenii din spatele clubului — pe teren și în afara lui."
+            />
+            <div className="mt-14">
+              <TeamCarousel members={teamMembers} />
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* 9 — CTA final ------------------------------------------------------- */}
       <section className="relative isolate overflow-hidden border-t border-line bg-surface">

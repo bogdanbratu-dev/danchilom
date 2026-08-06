@@ -10,6 +10,7 @@ const SECTIONS: { href: string; title: string; desc: string }[] = [
   { href: "/admin/baze", title: "Baze de antrenament", desc: "Adrese, dotări, poze, hărți." },
   { href: "/admin/istoric", title: "Istoric club", desc: "Momentele importante din evoluția clubului." },
   { href: "/admin/staff", title: "Staff tehnic", desc: "Antrenori, licențe, poze." },
+  { href: "/admin/membri-staff", title: "Membri staff", desc: "Caruselul cu echipa de pe prima pagină: poze, nume, roluri." },
   { href: "/admin/citat", title: "Cuvântul lui Dan", desc: "Citatul și poza de pe prima pagină." },
   { href: "/admin/palmares", title: "Palmares", desc: "Trofeele naționale și internaționale." },
   { href: "/admin/galerie", title: "Galerie foto", desc: "Toate pozele din galeria publică." },
