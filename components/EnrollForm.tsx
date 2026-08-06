@@ -14,14 +14,37 @@ const fieldClass =
   "mt-2 w-full rounded-lg border border-line bg-surface px-4 py-3 text-base text-paper placeholder:text-muted/70 focus:border-brand focus:outline-none";
 const labelClass = "block text-sm font-semibold text-paper/85";
 
+/** Construiește un link WhatsApp cu mesajul de înscriere deja completat. */
+function buildWhatsAppHref(
+  whatsappHref: string,
+  data: Record<string, FormDataEntryValue>,
+  baseLabel: string,
+) {
+  const lines = [
+    "Cerere de înscriere — AS Dan Chilom",
+    `Copil: ${data.childName} (${data.birthYear})`,
+    `Părinte: ${data.parentName}`,
+    `Telefon: ${data.phone}`,
+    data.email ? `Email: ${data.email}` : null,
+    `Bază preferată: ${baseLabel}`,
+    data.message ? `Mesaj: ${data.message}` : null,
+  ].filter(Boolean);
+
+  const url = new URL(whatsappHref);
+  url.searchParams.set("text", lines.join("\n"));
+  return url.toString();
+}
+
 export function EnrollForm({ bases, contact }: { bases: Base[]; contact: Contact }) {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
+  const [waHref, setWaHref] = useState(contact.whatsappHref);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries());
+    const baseLabel = bases.find((b) => b.slug === data.base)?.name ?? "Fără preferință";
 
     setStatus("sending");
     setError("");
@@ -40,8 +63,10 @@ export function EnrollForm({ bases, contact }: { bases: Base[]; contact: Contact
         return;
       }
 
-      // Emailul nu e încă activat pe server: îndrumăm părintele spre telefon.
+      // Emailul nu e încă activat pe server: îndrumăm părintele spre WhatsApp,
+      // cu mesajul deja completat din ce a scris în formular.
       if (json.code === "email-neconfigurat" || json.code === "trimitere-esuata") {
+        setWaHref(buildWhatsAppHref(contact.whatsappHref, data, baseLabel));
         setStatus("fallback");
         return;
       }
@@ -49,6 +74,7 @@ export function EnrollForm({ bases, contact }: { bases: Base[]; contact: Contact
       setError(json.error || "A apărut o eroare. Încearcă din nou.");
       setStatus("error");
     } catch {
+      setWaHref(buildWhatsAppHref(contact.whatsappHref, data, baseLabel));
       setStatus("fallback");
     }
   }
@@ -220,25 +246,25 @@ export function EnrollForm({ bases, contact }: { bases: Base[]; contact: Contact
       {status === "fallback" && (
         <div role="alert" className="rounded-card border border-brand/50 bg-brand/10 p-5">
           <p className="text-sm leading-relaxed text-paper/90">
-            Momentan nu putem trimite formularul automat. Sună-ne direct sau scrie-ne pe
-            WhatsApp — răspundem la fel de repede.
+            Momentan nu putem trimite formularul automat. Apasă pe WhatsApp — mesajul e deja
+            completat cu datele de mai sus, doar apeși trimite.
           </p>
           <div className="mt-4 flex flex-col gap-3 sm:flex-row">
             <a
-              href={contact.phoneHref}
+              href={waHref}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-brand px-6 text-xs font-bold uppercase tracking-wide text-white"
+            >
+              <IconWhatsapp className="size-4" />
+              Trimite pe WhatsApp
+            </a>
+            <a
+              href={contact.phoneHref}
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-line px-6 text-xs font-bold uppercase tracking-wide"
             >
               <IconPhone className="size-4" />
               {contact.phone}
-            </a>
-            <a
-              href={contact.whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-line px-6 text-xs font-bold uppercase tracking-wide"
-            >
-              <IconWhatsapp className="size-4" />
-              WhatsApp
             </a>
           </div>
         </div>
