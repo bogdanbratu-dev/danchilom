@@ -19,6 +19,7 @@ const NAV: { href: string; label: string }[] = [
   { href: "/admin/galerie", label: "Galerie foto" },
   { href: "/admin/faq", label: "Întrebări frecvente" },
   { href: "/admin/analytics", label: "Trafic site" },
+  { href: "/admin/backups", label: "Copii de siguranță" },
 ];
 
 export function AdminShell({ children }: { children: React.ReactNode }) {
