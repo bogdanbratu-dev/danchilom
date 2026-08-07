@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@google-analytics/data": "^7.0.0",
     "@vercel/blob": "^2.6.1",
     "next": "^15.5.4",
     "react": "^19.1.1",
