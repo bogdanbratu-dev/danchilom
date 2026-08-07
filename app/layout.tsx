@@ -1,9 +1,12 @@
 import type { Metadata, Viewport } from "next";
+import { cookies } from "next/headers";
 import { Inter, Oswald } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { MobileActionBar } from "@/components/MobileActionBar";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { getContent } from "@/lib/content";
+import { ADMIN_COOKIE_NAME, verifySessionCookie } from "@/lib/admin-auth";
 import "./globals.css";
 
 const inter = Inter({
@@ -65,6 +68,8 @@ export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const { site, contact, bases, nav } = await getContent();
+  const cookieStore = await cookies();
+  const isAdmin = await verifySessionCookie(cookieStore.get(ADMIN_COOKIE_NAME)?.value);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -117,6 +122,9 @@ export default async function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        {!isAdmin && process.env.GA_MEASUREMENT_ID && (
+          <GoogleAnalytics measurementId={process.env.GA_MEASUREMENT_ID} />
+        )}
       </body>
     </html>
   );
