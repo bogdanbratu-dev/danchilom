@@ -31,7 +31,12 @@ Arhitectura:
   salvat deja din admin — nu se editează manual după lansare.
 - [lib/content-store.ts](lib/content-store.ts) — citește/scrie conținutul (JSON) și
   imaginile încărcate: pe **Vercel Blob** dacă `BLOB_READ_WRITE_TOKEN` e configurat,
-  altfel local (`content/data.json` + `public/img/uploads/`, ambele gitignored).
+  altfel local (`content/data.json` + `public/img/uploads/`, ambele gitignored). Fiecare
+  scriere salvează automat starea anterioară ca o copie de siguranță (până la 30, cu
+  purjare automată a celor mai vechi) — vizibile și restaurabile cu un click din
+  `/admin/backups`. Restaurarea e la rândul ei reversibilă (salvează starea curentă
+  înainte de a suprascrie). Nu există alt mecanism de recuperare — dacă vreodată e nevoie
+  de o versiune mai veche de 30 de salvări, nu mai poate fi adusă înapoi de acolo.
 - [lib/content.ts](lib/content.ts) — `getContent()`, memoizat per-request cu `cache()`
   din React; e singurul loc din care paginile/componentele citesc conținutul. Nu mai
   există import direct din `content/site.ts` (fișierul a fost șters).
@@ -78,6 +83,22 @@ homepage, pagini interioare, formular+API, SEO, documentație, verificare). Ulte
 adăugat panoul complet de administrare (`/admin`) descris mai sus, ca Dan să poată edita
 singur orice conținut, în locul fluxului bazat pe `CONTENT-TODO.md` + aprobarea mea.
 
-Nu s-a făcut încă: deploy pe Vercel, cumpărarea domeniului, configurarea Resend,
-configurarea `ADMIN_PASSWORD`/`BLOB_READ_WRITE_TOKEN` în producție, orice conținut din
-`CONTENT-TODO.md` confirmat de Dan (acum se rezolvă direct din `/admin`).
+**Site live în producție** pe [danchilom.com](https://danchilom.com) (Vercel + domeniu
+cumpărat, DNS pe GoDaddy). `ADMIN_PASSWORD` și `BLOB_READ_WRITE_TOKEN` configurate — admin-ul
+scrie definitiv (nu doar local) și conținutul are copii de siguranță automate (vezi mai sus).
+
+**Analytics** — GA4 conectat (`GA_MEASUREMENT_ID` în layout, exclude automat sesiunile din
+`/admin`) + un tab nativ **`/admin/analytics`** ("Trafic site") care interoghează direct
+Google Analytics Data API prin `lib/ga-report.ts`, folosind un Service Account
+(`GA_SERVICE_ACCOUNT_JSON` + `GA_PROPERTY_ID` în Vercel — cheia JSON nu există nicăieri în
+repo, doar în variabilele de mediu). Presetări Azi/Ieri/7/28/90 zile + interval
+personalizat, grafic tip candlestick pe zile, defalcare pe țară/oraș. S-a preferat această
+soluție codificată în locul unui embed Looker Studio, la cererea explicită a utilizatorului.
+
+**SEO local** — Search Console verificat (proprietate de domeniu) cu sitemap trimis; Google
+Business Profile existent identificat și în curs de actualizare (link către site, program,
+status).
+
+Nu s-a făcut încă: configurarea Resend (formularul funcționează pe fallback telefon/WhatsApp,
+comportament permanent acceptat — vezi mai sus), orice conținut din `CONTENT-TODO.md`
+confirmat de Dan (acum se rezolvă direct din `/admin`).
