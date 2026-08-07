@@ -2,7 +2,7 @@ import { BetaAnalyticsDataClient } from "@google-analytics/data";
 
 export type TrafficReport = {
   totals: { users: number; sessions: number; pageViews: number };
-  byDay: { date: string; users: number; sessions: number }[];
+  byDay: { date: string; users: number; sessions: number; pageViews: number }[];
   byCountry: { name: string; users: number }[];
   byCity: { name: string; users: number }[];
 };
@@ -19,13 +19,16 @@ function formatDayLabel(gaDate: string) {
   return `${gaDate.slice(6, 8)}.${gaDate.slice(4, 6)}`;
 }
 
-export async function getTrafficReport(days: number): Promise<TrafficReport | null> {
+export async function getTrafficReport(
+  startDate: string,
+  endDate: string,
+): Promise<TrafficReport | null> {
   const propertyId = process.env.GA_PROPERTY_ID;
   const client = getClient();
   if (!client || !propertyId) return null;
 
   const property = `properties/${propertyId}`;
-  const dateRanges = [{ startDate: `${days}daysAgo`, endDate: "today" }];
+  const dateRanges = [{ startDate, endDate }];
 
   const [totalsRes, byDayRes, byCountryRes, byCityRes] = await Promise.all([
     client.runReport({
@@ -37,7 +40,7 @@ export async function getTrafficReport(days: number): Promise<TrafficReport | nu
       property,
       dateRanges,
       dimensions: [{ name: "date" }],
-      metrics: [{ name: "activeUsers" }, { name: "sessions" }],
+      metrics: [{ name: "activeUsers" }, { name: "sessions" }, { name: "screenPageViews" }],
       orderBys: [{ dimension: { dimensionName: "date" } }],
     }),
     client.runReport({
@@ -70,6 +73,7 @@ export async function getTrafficReport(days: number): Promise<TrafficReport | nu
       date: formatDayLabel(r.dimensionValues![0].value!),
       users: Number(r.metricValues![0].value),
       sessions: Number(r.metricValues![1].value),
+      pageViews: Number(r.metricValues![2].value),
     })),
     byCountry: (byCountryRes[0].rows ?? []).map((r) => ({
       name: r.dimensionValues![0].value || "Necunoscut",

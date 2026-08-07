@@ -1,12 +1,18 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { getTrafficReport } from "@/lib/ga-report";
 
+const DATE_PATTERN = /^(today|yesterday|\d+daysAgo|\d{4}-\d{2}-\d{2})$/;
+
 export async function GET(request: NextRequest) {
-  const days = Number(request.nextUrl.searchParams.get("days") ?? "28");
-  const safeDays = [7, 28, 90].includes(days) ? days : 28;
+  const start = request.nextUrl.searchParams.get("start") ?? "28daysAgo";
+  const end = request.nextUrl.searchParams.get("end") ?? "today";
+
+  if (!DATE_PATTERN.test(start) || !DATE_PATTERN.test(end)) {
+    return NextResponse.json({ error: "Interval de date invalid." }, { status: 400 });
+  }
 
   try {
-    const report = await getTrafficReport(safeDays);
+    const report = await getTrafficReport(start, end);
     if (!report) {
       return NextResponse.json({ error: "Raportul de trafic nu e configurat încă." }, { status: 501 });
     }
