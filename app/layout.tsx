@@ -114,7 +114,7 @@ export default async function RootLayout({
         >
           Sari la conținut
         </a>
-        <Header site={site} contact={contact} nav={nav} />
+        <Header site={site} contact={contact} nav={nav} isAdmin={isAdmin} />
         <main id="continut">{children}</main>
         <Footer site={site} contact={contact} nav={nav} bases={bases} />
         <MobileActionBar contact={contact} />
