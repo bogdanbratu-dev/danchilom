@@ -4,7 +4,7 @@ import { ButtonGhost, ButtonPrimary, PageHero } from "@/components/UI";
 import { getContent } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Galerie foto",
+  title: "Galerie foto — fotbal copii București",
   description:
     "Fotografii de la antrenamentele și meciurile AS Dan Chilom: grupele de copii, juniorii, echipa de seniori și bazele de antrenament din București.",
   alternates: { canonical: "/galerie" },

@@ -13,7 +13,7 @@ import { PageHero } from "@/components/UI";
 import { getContent } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Contact și înscrieri",
+  title: "Contact și înscrieri — fotbal copii București",
   description:
     "Înscrie copilul la AS Dan Chilom: completează formularul, sună la 0729 669 747 sau scrie-ne pe WhatsApp. Primul antrenament este de probă, fără obligații.",
   alternates: { canonical: "/contact" },

@@ -6,7 +6,7 @@ import { ButtonPrimary, PageHero, SectionHeading } from "@/components/UI";
 import { getContent } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Despre noi — povestea academiei",
+  title: "Despre academie — fotbal copii București",
   description:
     "AS Dan Chilom, din 2011: antrenori licențiați UEFA, generații crescute la club, trofee naționale și internaționale și o echipă de seniori în Liga 4.",
   alternates: { canonical: "/despre" },

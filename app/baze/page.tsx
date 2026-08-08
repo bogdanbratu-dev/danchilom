@@ -6,7 +6,7 @@ import { ButtonGhost, ButtonPrimary, PageHero } from "@/components/UI";
 import { getContent } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Baze de antrenament în Sectorul 2",
+  title: "Baze de antrenament — fotbal copii Sector 2",
   description:
     "Bazele de antrenament AS Dan Chilom din Sectorul 2, București: teren omologat FRF lângă Arena Națională și terenul din Parcul Florilor, cu nocturnă, vestiare și balon încălzit iarna.",
   alternates: { canonical: "/baze" },

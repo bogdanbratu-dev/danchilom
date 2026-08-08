@@ -5,7 +5,7 @@ import { ButtonGhost, ButtonPrimary, PageHero, SectionHeading } from "@/componen
 import { getContent } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Grupe de vârstă și program",
+  title: "Grupe de vârstă — fotbal copii București",
   description:
     "Grupele AS Dan Chilom, de la inițiere (4–7 ani) la juniori competițional și performanță. Ce se lucrează la fiecare vârstă, câte antrenamente pe săptămână și în ce competiții jucăm.",
   alternates: { canonical: "/grupe" },
@@ -14,8 +14,24 @@ export const metadata: Metadata = {
 export default async function GrupePage() {
   const { contact, faq, groups } = await getContent();
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faq.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
+  };
+
   return (
     <>
+      {faq.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
       <PageHero
         eyebrow="Grupe"
         title="Fiecare vârstă, cu antrenamentul potrivit pentru ea"
