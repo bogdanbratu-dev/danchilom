@@ -246,7 +246,7 @@ export const defaultContent: Content = {
       {
         club: "IFK Mariehamn",
         league: "Veikkausliiga (prima ligă a Finlandei)",
-        detail: "15 meciuri în campionat și 7 meciuri în Cupa Ligii Finlandeze",
+        detail: "22 de meciuri: 15 în campionat și 7 în Cupa Ligii Finlandeze",
       },
       { club: "Dinamo 2 București", league: "Liga 2", detail: "" },
       { club: "FC Snagov", league: "Liga 2 și Liga 3", detail: "" },
