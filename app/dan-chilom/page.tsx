@@ -36,7 +36,7 @@ export default async function DanChilomPage() {
       />
       <PageHero
         eyebrow="Dan Chilom"
-        title="Cu experiență și la Dinamo, și în Finlanda, îi duce azi pe cei mici pe drumul cel bun"
+        title="Din poarta lui Dinamo până în Finlanda și Estonia, azi Dan Chilom construiește viitorul celor mici"
         intro={founderCareer.intro}
         image={founderCareer.photo}
         imageAlt={founderCareer.photoAlt}

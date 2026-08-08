@@ -240,9 +240,9 @@ export const defaultContent: Content = {
     position: "Portar",
     trainedAt: "Crescut la FC Dinamo București",
     intro:
-      "Înainte de a fonda academia, Dan Chilom a fost portar, crescut la FC Dinamo București. A jucat atât în România, cât și în Finlanda, iar astăzi pune la treabă, ca antrenor licențiat UEFA A, tot ce a învățat pe teren.",
+      "Înainte de a fonda academia, Dan Chilom a apărat poarta la FC Dinamo București și, mai târziu, în prima ligă a Finlandei. Experiența adunată în ani de fotbal jucat departe de casă s-a transformat astăzi în pasiunea cu care, ca antrenor licențiat UEFA A, îi ghidează pe cei mici la fiecare antrenament.",
     clubs: [
-      { club: "Dinamo București", league: "Liga 1", detail: "1 prezență" },
+      { club: "Dinamo București", league: "Liga 1", detail: "" },
       {
         club: "IFK Mariehamn",
         league: "Veikkausliiga (prima ligă a Finlandei)",
