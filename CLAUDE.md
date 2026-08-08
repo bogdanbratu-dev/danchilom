@@ -25,7 +25,7 @@ Arhitectura:
 
 - [content/schema.ts](content/schema.ts) — schema Zod + tipurile TypeScript pentru fiecare
   secțiune de conținut (site, contact, legal, stats, values, groups, bases, timeline,
-  staff, founderQuote, trophies, gallery, faq, nav).
+  staff, founderQuote, founderCareer, trophies, gallery, faq, nav).
 - [content/defaults.ts](content/defaults.ts) — valorile inițiale (seed), migrate din
   vechiul `content/site.ts`. Se folosesc doar pentru câmpurile care lipsesc din ce s-a
   salvat deja din admin — nu se editează manual după lansare.
@@ -98,6 +98,12 @@ soluție codificată în locul unui embed Looker Studio, la cererea explicită a
 **SEO local** — Search Console verificat (proprietate de domeniu) cu sitemap trimis; Google
 Business Profile existent identificat și în curs de actualizare (link către site, program,
 status).
+
+**Pagina „Dan Chilom”** ([app/dan-chilom/page.tsx](app/dan-chilom/page.tsx)) — CV-ul lui Dan
+ca fost jucător (portar, crescut la Dinamo București, apoi IFK Mariehamn în prima ligă
+finlandeză, licență UEFA A din 2018 etc.), editabil din `/admin/cariera` prin secțiunea
+`founderCareer` din schema de conținut. Linkuită din navigația principală, din citatul lui
+Dan de pe homepage și din `/despre`.
 
 Nu s-a făcut încă: configurarea Resend (formularul funcționează pe fallback telefon/WhatsApp,
 comportament permanent acceptat — vezi mai sus), orice conținut din `CONTENT-TODO.md`

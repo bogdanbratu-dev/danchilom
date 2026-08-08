@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { CoachCard, FeatureCard, TrophyList } from "@/components/Cards";
 import { IconArrow } from "@/components/Icons";
 import { ButtonPrimary, PageHero, SectionHeading } from "@/components/UI";
@@ -63,6 +64,12 @@ export default async function DesprePage() {
             <figcaption className="mt-5 border-l-2 border-brand pl-5">
               <p className="font-display text-lg">{founderQuote.author}</p>
               <p className="mt-1 text-sm text-muted">{founderQuote.role}</p>
+              <Link
+                href="/dan-chilom"
+                className="mt-3 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-brand-soft underline underline-offset-4 hover:text-paper"
+              >
+                Vezi și cariera lui de fotbalist
+              </Link>
             </figcaption>
           </figure>
         </div>

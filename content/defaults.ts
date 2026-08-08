@@ -235,6 +235,31 @@ export const defaultContent: Content = {
     imageAlt: "Dan Chilom alături de copii din academie, pe terenul de antrenament",
   },
 
+  // TODO(Dan): completează/corectează cariera de jucător după cum vrei să apară pe site.
+  founderCareer: {
+    position: "Portar",
+    trainedAt: "Crescut la FC Dinamo București",
+    intro:
+      "Înainte de a fonda academia, Dan Chilom a fost portar de fotbal, crescut la FC Dinamo București. A jucat atât în România, cât și în Finlanda, iar astăzi pune la treabă, ca antrenor licențiat UEFA A, tot ce a învățat pe teren.",
+    clubs: [
+      { club: "Dinamo București", league: "Liga 1", detail: "1 prezență" },
+      {
+        club: "IFK Mariehamn",
+        league: "Veikkausliiga (prima ligă a Finlandei)",
+        detail: "15 meciuri în campionat și 7 meciuri în Cupa Ligii Finlandeze",
+      },
+      { club: "Dinamo 2 București", league: "Liga 2", detail: "" },
+      { club: "FC Snagov", league: "Liga 2 și Liga 3", detail: "" },
+      { club: "FC Poiana Câmpina", league: "Liga 2", detail: "" },
+      { club: "FC Buftea", league: "Ligi inferioare", detail: "" },
+    ],
+    nationalTeam:
+      "Peste 45 de meciuri pentru echipele naționale de juniori și tineret ale României. Participant cu naționala U18 la Campionatul European din Anglia.",
+    license: "Licența UEFA A, din 2018.",
+    photo: "/img/galerie/dan-chilom-cu-copiii.jpg",
+    photoAlt: "Dan Chilom, fost portar de fotbal și antrenor licențiat UEFA A",
+  },
+
   trophies: [
     { year: "2013", title: "Locul 1 — Nicola Iordanov Cup, Bulgaria", scope: "international" },
     { year: "2012–2013", title: "Campioană a Bucureștiului la mini-fotbal, generația 2002", scope: "national" },
@@ -297,6 +322,7 @@ export const defaultContent: Content = {
   nav: [
     { href: "/", label: "Acasă" },
     { href: "/despre", label: "Despre noi" },
+    { href: "/dan-chilom", label: "Dan Chilom" },
     { href: "/grupe", label: "Grupe" },
     { href: "/baze", label: "Baze" },
     { href: "/galerie", label: "Galerie" },

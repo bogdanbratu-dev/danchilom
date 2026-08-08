@@ -112,6 +112,23 @@ export const founderQuoteSchema = z.object({
   imageAlt: z.string(),
 });
 
+export const careerClubSchema = z.object({
+  club: z.string().min(1),
+  league: z.string().min(1),
+  detail: z.string(),
+});
+
+export const founderCareerSchema = z.object({
+  position: z.string().min(1),
+  trainedAt: z.string().min(1),
+  intro: z.string().min(1),
+  clubs: z.array(careerClubSchema),
+  nationalTeam: z.string().min(1),
+  license: z.string().min(1),
+  photo: z.string(),
+  photoAlt: z.string(),
+});
+
 export const trophySchema = z.object({
   year: z.string().min(1),
   title: z.string().min(1),
@@ -145,6 +162,7 @@ export const contentSchema = z.object({
   staff: z.array(coachSchema),
   teamMembers: z.array(teamMemberSchema),
   founderQuote: founderQuoteSchema,
+  founderCareer: founderCareerSchema,
   trophies: z.array(trophySchema),
   gallery: z.array(galleryPhotoSchema),
   faq: z.array(faqSchema),
@@ -164,6 +182,8 @@ export type Milestone = z.infer<typeof milestoneSchema>;
 export type Coach = z.infer<typeof coachSchema>;
 export type TeamMember = z.infer<typeof teamMemberSchema>;
 export type FounderQuote = z.infer<typeof founderQuoteSchema>;
+export type CareerClub = z.infer<typeof careerClubSchema>;
+export type FounderCareer = z.infer<typeof founderCareerSchema>;
 export type Trophy = z.infer<typeof trophySchema>;
 export type GalleryPhoto = z.infer<typeof galleryPhotoSchema>;
 export type Faq = z.infer<typeof faqSchema>;
@@ -183,6 +203,7 @@ export const sectionKeys = [
   "staff",
   "teamMembers",
   "founderQuote",
+  "founderCareer",
   "trophies",
   "gallery",
   "faq",
@@ -202,6 +223,7 @@ const sectionSchemas: Record<SectionKey, z.ZodTypeAny> = {
   staff: z.array(coachSchema),
   teamMembers: z.array(teamMemberSchema),
   founderQuote: founderQuoteSchema,
+  founderCareer: founderCareerSchema,
   trophies: z.array(trophySchema),
   gallery: z.array(galleryPhotoSchema),
   faq: z.array(faqSchema),

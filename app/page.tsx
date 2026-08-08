@@ -71,6 +71,12 @@ export default async function HomePage() {
             <footer className="mt-8 border-t border-white/25 pt-6">
               <p className="font-display text-xl text-white">{founderQuote.author}</p>
               <p className="mt-1 text-sm text-white/80">{founderQuote.role}</p>
+              <Link
+                href="/dan-chilom"
+                className="mt-4 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-white underline underline-offset-4 hover:text-white/80"
+              >
+                Cariera lui de fotbalist
+              </Link>
             </footer>
           </blockquote>
 

@@ -15,6 +15,7 @@ const NAV: { href: string; label: string }[] = [
   { href: "/admin/istoric", label: "Istoric club" },
   { href: "/admin/staff", label: "Staff tehnic" },
   { href: "/admin/citat", label: "Cuvântul lui Dan" },
+  { href: "/admin/cariera", label: "Cariera lui Dan" },
   { href: "/admin/palmares", label: "Palmares" },
   { href: "/admin/galerie", label: "Galerie foto" },
   { href: "/admin/faq", label: "Întrebări frecvente" },

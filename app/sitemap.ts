@@ -10,6 +10,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/grupe", priority: 0.9, changeFrequency: "monthly" },
     { path: "/contact", priority: 0.9, changeFrequency: "monthly" },
     { path: "/despre", priority: 0.8, changeFrequency: "monthly" },
+    { path: "/dan-chilom", priority: 0.7, changeFrequency: "monthly" },
     { path: "/baze", priority: 0.8, changeFrequency: "monthly" },
     { path: "/galerie", priority: 0.6, changeFrequency: "monthly" },
     { path: "/politica-de-confidentialitate", priority: 0.2, changeFrequency: "yearly" },
