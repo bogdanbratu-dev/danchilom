@@ -36,7 +36,7 @@ export default async function DanChilomPage() {
       />
       <PageHero
         eyebrow="Dan Chilom"
-        title="Fost portar, azi antrenor licențiat UEFA A"
+        title="Cu experiență și la Dinamo, și în Finlanda, îi duce azi pe cei mici pe drumul cel bun"
         intro={founderCareer.intro}
         image={founderCareer.photo}
         imageAlt={founderCareer.photoAlt}

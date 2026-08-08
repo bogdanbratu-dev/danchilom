@@ -240,7 +240,7 @@ export const defaultContent: Content = {
     position: "Portar",
     trainedAt: "Crescut la FC Dinamo București",
     intro:
-      "Înainte de a fonda academia, Dan Chilom a fost portar de fotbal, crescut la FC Dinamo București. A jucat atât în România, cât și în Finlanda, iar astăzi pune la treabă, ca antrenor licențiat UEFA A, tot ce a învățat pe teren.",
+      "Înainte de a fonda academia, Dan Chilom a fost portar, crescut la FC Dinamo București. A jucat atât în România, cât și în Finlanda, iar astăzi pune la treabă, ca antrenor licențiat UEFA A, tot ce a învățat pe teren.",
     clubs: [
       { club: "Dinamo București", league: "Liga 1", detail: "1 prezență" },
       {
@@ -256,8 +256,8 @@ export const defaultContent: Content = {
     nationalTeam:
       "Peste 45 de meciuri pentru echipele naționale de juniori și tineret ale României. Participant cu naționala U18 la Campionatul European din Anglia.",
     license: "Licența UEFA A, din 2018.",
-    photo: "/img/galerie/dan-chilom-cu-copiii.jpg",
-    photoAlt: "Dan Chilom, fost portar de fotbal și antrenor licențiat UEFA A",
+    photo: "/img/galerie/dan-chilom-portar.jpg",
+    photoAlt: "Dan Chilom, portar, în timpul carierei sale de jucător",
   },
 
   trophies: [
